@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+  
+  double V, alpha, L;
+  double g = 9.81; 
+
+  
+  cout << "Enter the initial velocity (V) in m/s: ";
+  cin >> V;
+
+  cout << "Enter the launch angle (alpha) in degrees: ";
+  cin >> alpha;
+
+  
+  alpha = alpha * M_PI / 180;
+
+  
+  L = (V * V * sin(2 * alpha)) / g;
+
+  
+  cout << "The range (L) is: " << L << " meters" << endl;
+
+  return 0;
+}
