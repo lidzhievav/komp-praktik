@@ -1,0 +1,24 @@
+import math
+
+def main():
+    H = float(input("Enter the height of the cliff (H) in meters: "))
+    V = float(input("Enter the initial velocity (V) in m/s: "))
+    alpha = float(input("Enter the launch angle (alpha) in degrees: "))
+    t = float(input("Enter the time (t) in seconds: "))
+    
+    alpha = math.radians(alpha)
+    g = 9.81
+
+    T = (V * math.sin(alpha) / g) * (1 + math.sqrt(1 + (2 * g * H) / (V ** 2 * (math.sin(alpha) ** 2))))
+
+    x = V * t * math.cos(alpha)
+    y = H + V * t * math.sin(alpha) - (g * t ** 2) / 2
+
+    y = 0 if t > T else y  # If t > T, set y to 0 (ground level)
+
+    print(f"Horizontal position (x): {x} meters")
+    print(f"Vertical position (y): {y} meters (from the bottom of the cliff)")
+
+if __name__ == "__main__":
+    main()
+
