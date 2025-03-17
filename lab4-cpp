@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+  
+  double H, V, alpha, t, x, y, T;
+  double g = 9.81; 
+
+  cout << "Enter the height of the cliff (H) in meters: ";
+  cin >> H;
+
+  cout << "Enter the initial velocity (V) in m/s: ";
+  cin >> V;
+
+  cout << "Enter the launch angle (alpha) in degrees: ";
+  cin >> alpha;
+
+  cout << "Enter the time (t) in seconds: ";
+  cin >> t;
+
+  alpha = alpha * M_PI / 180;
+
+  T = (V * sin(alpha) / g) * (1 + sqrt(1 + (2 * g * H) / (V * V * pow(sin(alpha), 2))));
+
+  x = V * t * cos(alpha);
+  y = H + V * t * sin(alpha) - (g * t * t) / 2;
+
+  y = (t > T) ? 0 : y; // If t > T, set y to 0 (ground level)
+
+  cout << "Horizontal position (x): " << x << " meters" << endl;
+  cout << "Vertical position (y): " << y << " meters (from the bottom of the cliff)" << endl;
+
+  return 0;
+}
