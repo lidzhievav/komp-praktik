@@ -1,0 +1,19 @@
+import math
+
+def main():
+    g = 9.81
+
+    H = float(input("Enter the maximum height (H) in meters: "))
+    L = float(input("Enter the range (L) in meters: "))
+
+    alpha = math.atan(4 * H / L)
+    alpha = alpha * 180 / math.pi
+
+    V = math.sqrt(g * L / math.sin(2 * alpha * math.pi / 180))
+
+    print(f"The launch angle (alpha) is: {alpha} degrees")
+    print(f"The initial velocity (V) is: {V} m/s")
+
+if __name__ == "__main__":
+    main()
+
