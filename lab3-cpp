@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+  
+  double H, L, alpha, V;
+  double g = 9.81; 
+
+  
+  cout << "Enter the maximum height (H) in meters: ";
+  cin >> H;
+
+  cout << "Enter the range (L) in meters: ";
+  cin >> L;
+
+  
+  alpha = atan(4 * H / L);
+
+  
+  alpha = alpha * 180 / M_PI;
+
+ 
+  V = sqrt(g*L / sin(2 * alpha * M_PI / 180));
+
+  
+  cout << "The launch angle (alpha) is: " << alpha << " degrees" << endl;
+  cout << "The initial velocity (V) is: " << V << " m/s" << endl;
+
+  return 0;
+}
