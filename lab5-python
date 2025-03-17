@@ -1,0 +1,11 @@
+import math
+
+H = float(input("Enter the height of the airplane (H) in meters: "))
+U = float(input("Enter the speed of the airplane (U) in m/s: "))
+
+g = 9.81
+T = math.sqrt(2 * H / g)
+S = U * T
+
+print(f"The distance (S) at which to drop the bomb is: {S} meters")
+
