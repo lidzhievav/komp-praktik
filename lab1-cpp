@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+  double V, T, alpha;
+  double g = 9.81; 
+
+  cout << "Enter the initial velocity (V) in m/s: ";
+  cin >> V;
+
+  cout << "Enter the time of flight (T) in seconds: ";
+  cin >> T;
+
+  alpha = asin((g * T) / (2 * V));
+
+  if (abs((g * T) / (2 * V)) > 1) {
+    cout << "Invalid input. The value inside asin is outside the range [-1, 1]."
+         << endl;
+    return 1; 
+  }
+
+  alpha = alpha * 180 / M_PI;
+
+  cout << "The launch angle (alpha) is: " << alpha << " degrees" << endl;
+
+  return 0;
+}
