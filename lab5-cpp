@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+  double H, U, S, T;
+  double g = 9.81; 
+
+  cout << "Enter the height of the airplane (H) in meters: ";
+  cin >> H;
+
+  cout << "Enter the speed of the airplane (U) in m/s: ";
+  cin >> U;
+
+  T = sqrt(2 * H / g);
+
+  S = U * T;
+
+  cout << "The distance (S) at which to drop the bomb is: " << S << " meters" << endl;
+
+  return 0;
+}
