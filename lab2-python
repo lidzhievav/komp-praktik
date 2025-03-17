@@ -1,0 +1,13 @@
+import math
+
+g = 9.81
+
+V = float(input("Enter the initial velocity (V) in m/s: "))
+alpha = float(input("Enter the launch angle (alpha) in degrees: "))
+
+alpha = alpha * math.pi / 180
+
+L = (V * V * math.sin(2 * alpha)) / g
+
+print(f"The range (L) is: {L} meters")
+
