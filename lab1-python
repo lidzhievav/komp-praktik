@@ -1,0 +1,21 @@
+import math
+
+def main():
+    initial_velocity = float(input("Enter the initial velocity (V) in m/s: "))
+    time_of_flight = float(input("Enter the time of flight (T) in seconds: "))
+    gravitational_acceleration = 9.81
+
+    alpha = math.asin((gravitational_acceleration * time_of_flight) / (2 * initial_velocity))
+
+    if abs((gravitational_acceleration * time_of_flight) / (2 * initial_velocity)) > 1:
+        print("Invalid input. The value inside asin is outside the range [-1, 1].")
+        return 1
+
+    alpha = alpha * 180 / math.pi
+
+    print("The launch angle (alpha) is: {:.2f} degrees".format(alpha))
+
+    return 0
+
+if __name__ == "__main__":
+    main()
