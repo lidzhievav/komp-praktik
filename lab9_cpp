@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+  double omega, k, phi0, T;
+
+  // Ввод данных
+  cout << "Введите частоту колебаний (omega): ";
+  cin >> omega;
+
+  cout << "Введите коэффициент (k): ";
+  cin >> k;
+
+  // Проверка корректности ввода k
+  if (k <= 0) {
+    cout << "Ошибка: k должно быть больше 0." << endl;
+    return 1; // Возвращаем код ошибки
+  }
+
+  // Вычисление phi0 (начальной фазы)
+  phi0 = asin(1.0 / k);
+
+  // Вычисление T (момента максимального отклонения)
+  T = (M_PI / 2 - phi0) / omega;
+
+  // Вывод результатов
+  cout << fixed << setprecision(2);
+  cout << "Начальная фаза (phi0): " << phi0 << " радиан" << endl;
+  cout << "Момент максимального отклонения (T): " << T << " секунд" << endl;
+
+  return 0;
+}
