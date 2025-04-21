@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+// Определяем константу ускорения свободного падения
+const double G = 9.81;
+
+// Функция для вычисления тангенса угла
+double calculate_tangent(double H, double L) {
+    return 4 * H / L;
+}
+
+// Функция для вычисления начальной скорости
+double calculate_initial_velocity(double g, double L, double alpha) {
+    return sqrt(g * L / sin(2 * alpha));
+}
+
+// Функция для вычисления значения выражения, корень которого ищем
+double function_to_solve(double alpha, double H, double L) {
+    return tan(alpha) - 4 * H / L;
+}
+
+// Функция для вычисления производной выражения
+double derivative_of_function(double alpha) {
+    return 1 / pow(cos(alpha), 2); // Производная тангенса
+}
+
+// Метод Ньютона для нахождения корня уравнения
+double newton_method(double H, double L, double initial_guess = 0.5, double tolerance = 1e-6, int max_iterations = 100) {
+    double alpha = initial_guess;
+    for (int i = 0; i < max_iterations; ++i) {
+        double f_alpha = function_to_solve(alpha, H, L);
+        double df_alpha = derivative_of_function(alpha);
+
+        if (abs(df_alpha) < 1e-10) { // Проверка на близость к нулю производной
+            cout << "Warning: Derivative is close to zero. Newton's method may not converge." << endl;
+            return NAN; // Возвращаем NaN (Not a Number) в случае ошибки
+        }
+
+        double next_alpha = alpha - f_alpha / df_alpha;
+
+        if (abs(next_alpha - alpha) < tolerance) {
+            return next_alpha;
+        }
+
+        alpha = next_alpha;
+    }
+
+    cout << "Warning: Newton's method did not converge within the maximum number of iterations." << endl;
+    return NAN; // Возвращаем NaN (Not a Number), если не удалось найти корень
+}
+
+int main() {
+    double H, L;
+
+    cout << "Введите максимальную высоту подъема H: ";
+    cin >> H;
+
+    cout << "Введите дальность полета L: ";
+    cin >> L;
+
+    // Используем метод Ньютона для нахождения угла alpha (в радианах)
+    double alpha_radians = newton_method(H, L);
+
+    if (isnan(alpha_radians)) {
+        cout << "Не удалось вычислить угол.  Возможно, некорректные входные данные." << endl;
+        return 1; // Выход из программы с кодом ошибки
+    }
+
+    // Переводим угол из радиан в градусы
+    double alpha_degrees = alpha_radians * 180 / M_PI;
+
+    // Вычисляем начальную скорость
+    double initial_velocity = calculate_initial_velocity(G, L, alpha_radians);
+
+    cout << fixed << setprecision(6);  // Устанавливаем точность вывода
+
+    cout << "Угол броска (alpha): " << alpha_degrees << " градусов" << endl;
+    cout << "Начальная скорость (V): " << initial_velocity << " м/с" << endl;
+
+    return 0;
+}
