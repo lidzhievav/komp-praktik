@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+
+const double G = 9.81;
+
+// Функция для вычисления времени падения бомбы
+double calculate_fall_time(double H) {
+    return sqrt(2 * H / G);
+}
+
+// Функция для вычисления подлетного расстояния
+double calculate_dropping_distance(double U, double T) {
+    return U * T;
+}
+
+int main() {
+    double H, U;
+
+    cout << "Введите высоту полета самолета (H): ";
+    cin >> H;
+
+    cout << "Введите скорость самолета (U): ";
+    cin >> U;
+
+    
+    double fall_time = calculate_fall_time(H);
+
+    
+    double dropping_distance = calculate_dropping_distance(U, fall_time);
+
+    cout << fixed << setprecision(6); 
+
+    cout << "Время падения бомбы (T): " << fall_time << " c" << endl;
+    cout << "Подлетное расстояние (S): " << dropping_distance << " м" << endl;
+
+    return 0;
+}
