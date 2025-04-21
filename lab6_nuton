@@ -1,0 +1,46 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+// Функция для вычисления времени движения лодки по течению
+double calculate_time_downstream(double S, double V, double U) {
+    return S / (V + U);
+}
+
+// Функция для вычисления времени движения лодки против течения
+double calculate_time_upstream(double S, double V, double U) {
+    return S / (V - U);
+}
+
+// Функция для вычисления общего времени движения лодки
+double calculate_total_time(double S, double V, double U) {
+    if (V <= U) {
+        cout << "Ошибка: Скорость лодки должна быть больше скорости течения." << endl;
+        return -1; 
+    }
+    return calculate_time_downstream(S, V, U) + calculate_time_upstream(S, V, U);
+}
+
+int main() {
+    double S, V, U;
+
+    cout << "Введите расстояние между пунктами (S): ";
+    cin >> S;
+
+    cout << "Введите скорость лодки (V): ";
+    cin >> V;
+
+    cout << "Введите скорость течения реки (U): ";
+    cin >> U;
+
+   
+    double total_time = calculate_total_time(S, V, U);
+
+    if (total_time != -1) {
+        cout << fixed << setprecision(6);  
+        cout << "Общее время движения лодки (T): " << total_time << " единиц времени" << endl;
+    }
+
+    return 0;
+}
