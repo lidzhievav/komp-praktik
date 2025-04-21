@@ -1,0 +1,70 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+// Константа ускорения свободного падения
+const double G = 9.81;
+
+// Функция для вычисления времени полета
+double calculate_flight_time(double V, double alpha, double H) {
+    return (V * sin(alpha) / G) * (1 + sqrt(1 + (2 * G * H) / (V * V * sin(alpha) * sin(alpha))));
+}
+
+// Функция для вычисления горизонтального положения камня
+double calculate_x(double V, double alpha, double t) {
+    return V * t * cos(alpha);
+}
+
+// Функция для вычисления вертикального положения камня 
+double calculate_y(double H, double V, double alpha, double t) {
+    return H + V * t * sin(alpha) - (G * t * t) / 2;
+}
+
+// Функция, возвращающая положение камня (x, y), с использованием тернарного оператора 
+pair<double, double> get_stone_position(double H, double V, double alpha, double t) {
+    double flight_time = calculate_flight_time(V, alpha, H);
+    double x, y;
+
+    
+    if (t > flight_time) {
+        x = calculate_x(V, alpha, flight_time); // x координата в момент падения
+        y = 0; // y координата в момент падения 
+    } else {
+        x = calculate_x(V, alpha, t);
+        y = calculate_y(H, V, alpha, t);
+    }
+
+    return make_pair(x, y);
+}
+
+int main() {
+    double H, V, alpha_degrees, t;
+
+    cout << "Введите высоту обрыва (H): ";
+    cin >> H;
+
+    cout << "Введите начальную скорость (V): ";
+    cin >> V;
+
+    cout << "Введите угол броска в градусах (alpha): ";
+    cin >> alpha_degrees;
+
+    
+    double alpha_radians = alpha_degrees * M_PI / 180.0;
+
+    cout << "Введите время (t): ";
+    cin >> t;
+
+    // Получаем положение камня
+    pair<double, double> position = get_stone_position(H, V, alpha_radians, t);
+
+    cout << fixed << setprecision(6); // Устанавливаем точность вывода
+
+    cout << "Положение камня в момент времени " << t << ":" << endl;
+    cout << "  x = " << position.first << " м" << endl;
+    cout << "  y = " << position.second << " м (высота от дна обрыва)" << endl;
+
+    return 0;
+}
