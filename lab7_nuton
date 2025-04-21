@@ -1,0 +1,45 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+// Функция для вычисления скорости V1
+double calculate_V1(double S, double t) {
+    return S / t;
+}
+
+// Функция для вычисления скорости V2
+double calculate_V2(double S, double V, double t) {
+    if (2 * S / V - t == 0) {
+        cout << "Ошибка: Знаменатель равен нулю." << endl;
+        return -1; 
+    }
+    return S / (2 * S / V - t);
+}
+
+int main() {
+    double S, V, t;
+
+    cout << "Введите расстояние между пунктами (S): ";
+    cin >> S;
+
+    cout << "Введите среднюю скорость движения туда и обратно (V): ";
+    cin >> V;
+
+    cout << "Введите время движения из A в B (t): ";
+    cin >> t;
+
+    
+    double V1 = calculate_V1(S, t);
+
+    
+    double V2 = calculate_V2(S, V, t);
+
+    if (V2 != -1) {
+        cout << fixed << setprecision(6); //Устанавливаем точность вывода
+        cout << "Скорость движения из A в B (V1): " << V1 << " единиц расстояния/единицу времени" << endl;
+        cout << "Скорость движения из B в A (V2): " << V2 << " единиц расстояния/единицу времени" << endl;
+    }
+
+    return 0;
+}
